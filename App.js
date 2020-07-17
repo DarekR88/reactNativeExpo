@@ -8,15 +8,24 @@ export default function App() {
   const [goals, setGoals] = useState([]);
 
   const addGoalHnadler = (goal) => {
-    setGoals((goalsList) => [...goalsList, {key: Math.random().toString(), value: goal}]);
+    setGoals((goalsList) => [...goalsList, {id: Math.random().toString(), value: goal}]);
   };
+
+  const removeGoalHndler = goalId => {
+    setGoals(goalsList => {
+      return goalsList.filter((goal) => goal.id !== goalId);
+    }
+
+    )
+  }
 
   return (
     <View style={styles.screen}>
       <GoalInput addGoalHnadler={addGoalHnadler} />
       <FlatList
+        keyExtractor={(item, index) => item.id}
         data={goals}
-        renderItem={(itemData) => <GoalList title={itemData.item.value}  />}
+        renderItem={(itemData) => <GoalList id={itemData.item.id} onDelete={removeGoalHndler} title={itemData.item.value}  />}
       />
       {/* <StatusBar style="auto" /> */}
     </View>

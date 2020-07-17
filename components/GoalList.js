@@ -1,13 +1,15 @@
-import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import React from "react";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 
-const GoalList = props => {
-    return (
+const GoalList = (props) => {
+  return (
+    <TouchableOpacity activeOpacity={0.7} onPress={props.onDelete.bind(this, props.id)} >
       <View style={styles.goals}>
         <Text>{props.title}</Text>
       </View>
-    );
-}
+    </TouchableOpacity>
+  );
+};
 
 const styles = StyleSheet.create({
   goals: {
@@ -17,6 +19,6 @@ const styles = StyleSheet.create({
     borderColor: "black",
     borderWidth: 1,
   },
-}); 
+});
 
 export default GoalList;
